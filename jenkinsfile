@@ -11,18 +11,24 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building application'
+                sh 'docker build -t myapp:latest .'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Running tests'
+                sh 'whoami'
+                sh 'docker ps'
+                sh 'docker images'
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying application'
+                sh '''
+                docker stop myapp || true
+                docker rm myapp || true
+                docker run -d --name myapp -p 80:80 myapp:latest
+                '''
             }
         }
     }
