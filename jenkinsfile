@@ -17,18 +17,18 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'whoami'
-                sh 'docker ps'
-                sh 'docker images'
+                sh ''' docker run -d --name test-container -p 3000:3000 $IMAGE_NAME:latest sleep 10 curl http://localhost:3000 | grep "Hello from Jenkins CI/CD!" docker stop test-container docker rm test-container '''
+                
+                
             }
         }
         stage('Deploy') {
             steps {
-                sh '''
-                docker stop myapp || true
-                docker rm myapp || true
-                docker run -d --name myapp -p 80:80 myapp:latest
-                '''
+                sh ''' docker stop app-container || true docker rm app-container || true docker run -d \ --name app-container \ -p 3000:3000 \ $IMAGE_NAME:latest '''
+                
+                
+                
+                
             }
         }
     }
