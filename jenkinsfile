@@ -18,14 +18,15 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh ''' docker run  -p 3000:3000 myapp '''
+                sh ''' docker run  -p 3000:3000 myapp 
+                        curl http://localhost:3000'''
                 
                 
             }
         }
         stage('Deploy') {
             steps {
-                sh ''' curl http://localhost:3000 '''
+                sh ' echo "hi" '
                 
                 
                 
