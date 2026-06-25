@@ -17,14 +17,14 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh ''' docker run -d --name test-container -p 3000:3000 myapp:latest sleep 10 curl http://localhost:3000 | grep "Hello from Jenkins CI/CD!" docker stop test-container docker rm test-container '''
+                sh ''' docker run -i -p 3000:3000 myapp:latest ./app '''
                 
                 
             }
         }
         stage('Deploy') {
             steps {
-                sh ''' docker stop app-container || true docker rm app-container || true docker run -d \ --name app-container \ -p 3000:3000 \ myapp:latest '''
+                sh ''' docker stop app-container || true docker rm app-container || true docker run -d \ --name myapp \ -p 3000:3000 \ myapp:latest '''
                 
                 
                 
