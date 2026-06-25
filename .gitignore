@@ -10,3 +10,4 @@ crash.log
 # Logs
 *.log
 .terraform.lock.hcl
+.app/node_modules
