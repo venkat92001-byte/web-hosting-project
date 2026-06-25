@@ -11,15 +11,15 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'docker build -t myapp:latest ./app'
-                sh 'node server.js'
+                sh 'docker build -t node-app ./app'
+                
             }
         }
 
         stage('Test') {
             steps {
-                sh ''' docker run  -p 3000:3000 myapp 
-                        curl http://localhost:3000'''
+                sh ' docker run -d --name node-app-container  -p 3000:3000 node-app'
+                
                 
                 
             }
