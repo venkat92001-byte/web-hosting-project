@@ -17,7 +17,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh ''' docker run -i -p 3000:3000 myapp:latest ./app '''
+                sh ''' docker run -i -p 3000:3000 myapp:latest  '''
                 
                 
             }
